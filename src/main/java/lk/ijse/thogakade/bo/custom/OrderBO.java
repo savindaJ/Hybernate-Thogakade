@@ -1,7 +1,8 @@
 package lk.ijse.thogakade.bo.custom;
 
 import lk.ijse.thogakade.bo.CrudBO;
+import lk.ijse.thogakade.dto.OrderDTO;
 import lk.ijse.thogakade.entity.Orders;
 
-public interface OrderBO extends CrudBO<Orders,String> {
+public interface OrderBO extends CrudBO<OrderDTO,String> {
 }
