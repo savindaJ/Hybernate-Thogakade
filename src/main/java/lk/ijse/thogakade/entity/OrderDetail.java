@@ -19,6 +19,6 @@ public class OrderDetail {
     String orderId;
     @Column(name = "item_code",length = 30)
     String itemCode;
-    @Column(name = "qty")
+    @Column(name = "qty",nullable = false)
     Integer qty;
 }

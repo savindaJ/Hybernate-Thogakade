@@ -17,10 +17,10 @@ public class Item {
     @Id
     @Column(name = "code",length = 30)
     String itemCode;
-    @Column(name = "ItemName")
+    @Column(name = "ItemName",nullable = false)
     String name;
-    @Column(name = "ItemPrice")
+    @Column(name = "ItemPrice",nullable = false)
     Double price;
-    @Column(name = "ItemQty")
+    @Column(name = "ItemQty",nullable = false)
     Integer qty;
 }

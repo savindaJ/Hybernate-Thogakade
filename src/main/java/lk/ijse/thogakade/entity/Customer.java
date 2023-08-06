@@ -14,11 +14,11 @@ import javax.persistence.*;
 /*naming table*/
 @Table(schema = "customer")
 public class Customer {
-    @Column(name = "CustomerName")
+    @Column(name = "CustomerName",nullable = false)
     String name;
-    @Column(name = "CustomerAddress")
+    @Column(name = "CustomerAddress",nullable = false)
     String address;
-    @Column(name = "CustomerSalary")
+    @Column(name = "CustomerSalary",nullable = false)
     Double salary;
     @Id //identify primary key
     @GeneratedValue(strategy = GenerationType.IDENTITY)

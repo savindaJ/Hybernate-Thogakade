@@ -19,8 +19,8 @@ public class Orders {
     @Id
     @Column(name = "orders_id",length = 30)
     String id;
-    @Column(name = "order_date")
+    @Column(name = "order_date",nullable = false)
     Date date;
-    @Column(name = "customer_ID")
+    @Column(name = "customer_ID",nullable = false)
     String customerId;
 }
