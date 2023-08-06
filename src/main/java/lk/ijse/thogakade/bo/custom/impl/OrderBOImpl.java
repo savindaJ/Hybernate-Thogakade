@@ -2,7 +2,6 @@ package lk.ijse.thogakade.bo.custom.impl;
 
 import lk.ijse.thogakade.bo.custom.OrderBO;
 import lk.ijse.thogakade.dto.OrderDTO;
-import lk.ijse.thogakade.entity.Orders;
 
 import java.util.List;
 
