@@ -21,9 +21,8 @@ public class Customer {
     @Column(name = "CustomerSalary",nullable = false)
     Double salary;
     @Id //identify primary key
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "customerID")  // identify column
-    int id;
+    String id;
     /*
         *  embedded usage
         *  new NameIdentifier
