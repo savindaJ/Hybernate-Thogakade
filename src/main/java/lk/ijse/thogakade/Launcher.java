@@ -8,6 +8,7 @@ public class Launcher {
         /*AppInitializer.main(args);*/
 
         try (Session session = Config.getInstance().getSession()) {
+            System.out.println("config");
         }
     }
 }
