@@ -5,6 +5,7 @@ import lombok.Data;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Transient;
 
 @Data
 @AllArgsConstructor
@@ -16,6 +17,8 @@ public class OrderDetail {
     String orderID;
     @Id
     String IemID;
+
+    @Transient
     Integer qty;
 
 }
