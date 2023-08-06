@@ -2,9 +2,12 @@ package lk.ijse.thogakade.configaration;
 
 import lk.ijse.thogakade.entity.Customer;
 import lk.ijse.thogakade.entity.Item;
+import lk.ijse.thogakade.entity.OrderDetail;
+import lk.ijse.thogakade.entity.Orders;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.criterion.Order;
 
 public class StandardConfig {
     private static final SessionFactory factory;
@@ -15,6 +18,8 @@ public class StandardConfig {
                 .configure()
                 .addAnnotatedClass(Customer.class)
                 .addAnnotatedClass(Item.class)
+                 .addAnnotatedClass(Orders.class)
+                 .addAnnotatedClass(OrderDetail.class)
                 .buildSessionFactory();
     }
 
