@@ -6,6 +6,8 @@ import lk.ijse.thogakade.entity.Customer;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
 import java.io.Serializable;
 import java.util.List;
 
@@ -37,7 +39,13 @@ public class CustomerDAOImpl implements CustomerDAO {
 
     @Override
     public List<Customer> getAll() {
-        return null;
+        Transaction transaction = session.beginTransaction();
+        CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+        CriteriaQuery<Customer> query = criteriaBuilder.createQuery(Customer.class);
+        query.from(Customer.class);
+        List<Customer> resultList = session.createQuery(query).getResultList();
+        transaction.commit();
+        return resultList;
     }
 
     @Override

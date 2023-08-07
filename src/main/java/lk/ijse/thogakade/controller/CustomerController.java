@@ -5,6 +5,8 @@ import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import javafx.animation.ScaleTransition;
 import javafx.animation.TranslateTransition;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -24,6 +26,7 @@ import javafx.util.Duration;
 import lk.ijse.thogakade.bo.BoFactory;
 import lk.ijse.thogakade.bo.custom.CustomerBo;
 import lk.ijse.thogakade.dto.CustomerDTO;
+import lk.ijse.thogakade.dto.tm.CustomerTM;
 import lk.ijse.thogakade.util.CustomAlert;
 
 import java.io.IOException;
@@ -40,11 +43,11 @@ public class CustomerController {
     public JFXButton btnDelete;
     public JFXComboBox cmbId;
     public JFXButton btnAddNew;
-    public TableView tblCustomer;
-    public TableColumn colId;
-    public TableColumn colName;
-    public TableColumn colAddress;
-    public TableColumn colSalary;
+    public TableView<CustomerTM> tblCustomer;
+    public TableColumn<? extends Object, ? extends Object> colId;
+    public TableColumn<? extends Object, ? extends Object> colName;
+    public TableColumn<? extends Object, ? extends Object> colAddress;
+    public TableColumn<? extends Object, ? extends Object> colSalary;
 
     private final CustomerBo customerBo = BoFactory.getInstance().getBo(BoFactory.BOTypes.CUSTOMER);
 
@@ -53,6 +56,20 @@ public class CustomerController {
         initUi();
         setCellValueFactory();
         btnUpdate.setDisable(false);
+        fillTable();
+    }
+
+    private void fillTable() {
+        ObservableList<CustomerTM> customerTMS = FXCollections.observableArrayList();
+        for (CustomerDTO customerDTO : customerBo.getAll()) {
+            customerTMS.add(new CustomerTM(
+                    customerDTO.getName(),
+                    customerDTO.getAddress(),
+                    customerDTO.getSalary(),
+                    customerDTO.getId())
+            );
+        }
+        tblCustomer.setItems(customerTMS);
     }
 
     private void setCellValueFactory() {

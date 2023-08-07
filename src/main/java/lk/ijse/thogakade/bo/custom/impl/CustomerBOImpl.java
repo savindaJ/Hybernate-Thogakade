@@ -9,6 +9,7 @@ import lk.ijse.thogakade.dto.CustomerDTO;
 import lk.ijse.thogakade.entity.Customer;
 import org.hibernate.Session;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CustomerBOImpl implements CustomerBo {
@@ -31,7 +32,16 @@ public class CustomerBOImpl implements CustomerBo {
 
     @Override
     public List<CustomerDTO> getAll() {
-        return null;
+        List<CustomerDTO> customerDTOS = new ArrayList<>();
+        for (Customer customer : customerDAO.getAll()) {
+            customerDTOS.add(new CustomerDTO(
+                    customer.getName(),
+                    customer.getAddress(),
+                    customer.getSalary(),
+                    customer.getId())
+            );
+        }
+        return customerDTOS;
     }
 
     @Override
