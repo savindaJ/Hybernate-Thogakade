@@ -44,6 +44,14 @@ public class ItemFormController {
 
     @FXML
     void initialize(){
+        initUI();
+    }
+
+    private void initUI() {
+        txtName.clear();
+        txtQty.clear();
+        txtItemPrice.clear();
+        txtCode.clear();
         txtName.setDisable(true);
         txtQty.setDisable(true);
         txtItemPrice.setDisable(true);
@@ -52,6 +60,7 @@ public class ItemFormController {
         btnUpdate.setDisable(true);
         btnDelete.setDisable(true);
     }
+
     public void btnSaveOnAction(ActionEvent actionEvent) {
     }
 
@@ -71,6 +80,8 @@ public class ItemFormController {
     }
 
     public void cmbIdOnAction(ActionEvent actionEvent) {
+        btnDelete.setDisable(false);
+        btnUpdate.setDisable(false);
     }
 
     public void btnBackClicked(MouseEvent event) throws IOException {
