@@ -21,7 +21,7 @@ public class Customer {
     @Column(name = "CustomerSalary",nullable = false)
     Double salary;
     @Id //identify primary key
-    @Column(name = "customerID")  // identify column
+    @Column(name = "customerID",length = 30)  // identify column
     String id;
     /*
         *  embedded usage
@@ -51,5 +51,7 @@ public class Customer {
     /*@GeneratedValue(strategy = GenerationType.SEQUENCE)*/
     /*@GeneratedValue(strategy = GenerationType.TABLE)*/
 
+    /*https://stackoverflow.com/questions/67511979/jpa-how-can-an-entity-refer-to-two-other-entities-involved-in-a-manytomany-rel*/
 
+    /*https://howtodoinjava.com/hibernate/hibernate-one-to-many-mapping/*/
 }

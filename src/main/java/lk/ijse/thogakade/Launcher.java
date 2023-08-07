@@ -12,7 +12,7 @@ public class Launcher {
         try (Session session = StandardConfig.getInstance().getSession()) {
             Transaction transaction = session.beginTransaction();
 
-            Customer customer = new Customer("kamal","matara",120000.56,1);
+            Customer customer = new Customer("kamal","matara",120000.56,"C002");
             session.save(customer);
             transaction.commit();
             session.close();
