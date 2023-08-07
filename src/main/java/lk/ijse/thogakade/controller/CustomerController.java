@@ -48,12 +48,10 @@ public class CustomerController {
     public TableColumn<? extends Object, ? extends Object> colName;
     public TableColumn<? extends Object, ? extends Object> colAddress;
     public TableColumn<? extends Object, ? extends Object> colSalary;
-
     private String name;
     private String id;
     private Double salary;
     private String address;
-
     private final CustomerBo customerBo = BoFactory.getInstance().getBo(BoFactory.BOTypes.CUSTOMER);
 
     @FXML
@@ -99,7 +97,6 @@ public class CustomerController {
         colId.setCellValueFactory(new PropertyValueFactory<>("id"));
     }
 
-
     public void btnSaveOnAction(ActionEvent actionEvent) {
         setDetail();
         boolean save = customerBo.save(new CustomerDTO(name, address, salary, id));
@@ -124,6 +121,14 @@ public class CustomerController {
     }
 
     public void btnDeleteOnAction(ActionEvent actionEvent) {
+        boolean delete = customerBo.delete(cmbId.getValue());
+        if (delete){
+            new CustomAlert(Alert.AlertType.CONFIRMATION,"Delete ","Deleted !","Delete successful !").show();
+        }else {
+            new CustomAlert(Alert.AlertType.ERROR,"Delete ","Not Delete !","Delete not successful !").show();
+        }
+        fillTable();
+        initUi();
     }
 
     public void cmbIdOnAction(ActionEvent actionEvent) {

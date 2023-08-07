@@ -32,7 +32,7 @@ public class CustomerBOImpl implements CustomerBo {
 
     @Override
     public boolean delete(String id) {
-        return false;
+        return customerDAO.delete(id);
     }
 
     @Override
