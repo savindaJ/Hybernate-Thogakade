@@ -6,6 +6,7 @@ import com.jfoenix.controls.JFXTextField;
 import javafx.animation.ScaleTransition;
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -41,6 +42,16 @@ public class ItemFormController {
     public TableColumn colPrice;
     private final ItemBO itemBO = BoFactory.getInstance().getBo(BoFactory.BOTypes.ITEM);
 
+    @FXML
+    void initialize(){
+        txtName.setDisable(true);
+        txtQty.setDisable(true);
+        txtItemPrice.setDisable(true);
+        txtCode.setDisable(true);
+        btnSave.setDisable(true);
+        btnUpdate.setDisable(true);
+        btnDelete.setDisable(true);
+    }
     public void btnSaveOnAction(ActionEvent actionEvent) {
     }
 
@@ -51,6 +62,12 @@ public class ItemFormController {
     }
 
     public void btnAddNewOnAction(ActionEvent actionEvent) {
+        txtName.setDisable(false);
+        txtName.requestFocus();
+        txtQty.setDisable(false);
+        txtItemPrice.setDisable(false);
+        txtCode.setDisable(false);
+        btnSave.setDisable(false);
     }
 
     public void cmbIdOnAction(ActionEvent actionEvent) {
