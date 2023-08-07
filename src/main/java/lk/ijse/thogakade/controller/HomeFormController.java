@@ -1,18 +1,30 @@
 package lk.ijse.thogakade.controller;
 
 import javafx.animation.ScaleTransition;
+import javafx.animation.TranslateTransition;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
+import javafx.stage.Stage;
 import javafx.util.Duration;
+
+import java.io.IOException;
+import java.util.Objects;
 
 public class HomeFormController {
     public Label lblStatus;
     public ImageView viewCustomer;
     public ImageView viewItem;
     public ImageView viewOrders;
+    public AnchorPane root;
+
+    private String path;
 
     public void mouseEnterde(MouseEvent event) {
         if (event.getSource() instanceof ImageView){
@@ -20,6 +32,7 @@ public class HomeFormController {
 
             switch (view.getId()){
                 case "viewOrders":
+                    path = "/view/";
                     lblStatus.setText("Go to Order Form");
                     break;
                 case "viewCustomer":
@@ -61,13 +74,20 @@ public class HomeFormController {
         lblStatus.setText("Home");
     }
 
-    public void btnCustomerOnAction(MouseEvent event) {
-    }
 
-    public void btnItemOnAction(MouseEvent event) {
-    }
+    public void btnClick(MouseEvent event) throws IOException {
+        Parent root = null;
+        root = FXMLLoader.load(Objects.requireNonNull(this.getClass().getResource(path)));
+        if (root != null) {
+            Scene subScene = new Scene(root);
+            Stage primaryStage = (Stage) this.root.getScene().getWindow();
+            primaryStage.setScene(subScene);
+            primaryStage.centerOnScreen();
 
-    public void btnOrderOnAction(MouseEvent event) {
-
+            TranslateTransition tt = new TranslateTransition(Duration.millis(350), subScene.getRoot());
+            tt.setFromX(-subScene.getWidth());
+            tt.setToX(0);
+            tt.play();
+        }
     }
 }
