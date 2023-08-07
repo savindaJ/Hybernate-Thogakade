@@ -36,6 +36,7 @@ public class HomeFormController {
                     lblStatus.setText("Go to Order Form");
                     break;
                 case "viewCustomer":
+                    path = "/view/customer_form.fxml";
                     lblStatus.setText("Go to Customer Form");
                     break;
                 case "viewItem" :
