@@ -16,17 +16,17 @@
             <Font name="System Bold" size="19.0" />
          </font>
       </Label>
-      <ImageView fitHeight="65.0" fitWidth="65.0" layoutX="128.0" layoutY="171.0" onMouseClicked="#btnCustomerOnAction" onMouseEntered="#mouseEnterde" onMouseExited="#mouseExsit" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="viewCustomer" fitHeight="65.0" fitWidth="65.0" layoutX="128.0" layoutY="171.0" onMouseClicked="#btnCustomerOnAction" onMouseEntered="#mouseEnterde" onMouseExited="#mouseExsit" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../assets/customer.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="65.0" fitWidth="65.0" layoutX="263.0" layoutY="171.0" onMouseClicked="#btnItemOnAction" onMouseEntered="#mouseEnterde" onMouseExited="#mouseExsit" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="viewItem" fitHeight="65.0" fitWidth="65.0" layoutX="263.0" layoutY="171.0" onMouseClicked="#btnItemOnAction" onMouseEntered="#mouseEnterde" onMouseExited="#mouseExsit" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../assets/item.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="65.0" fitWidth="65.0" layoutX="408.0" layoutY="171.0" onMouseClicked="#btnOrderOnAction" onMouseEntered="#mouseEnterde" onMouseExited="#mouseExsit" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="viewOrders" fitHeight="65.0" fitWidth="65.0" layoutX="408.0" layoutY="171.0" onMouseClicked="#btnOrderOnAction" onMouseEntered="#mouseEnterde" onMouseExited="#mouseExsit" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../assets/place_order.png" />
          </image>
