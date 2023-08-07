@@ -128,11 +128,12 @@ public class CustomerController {
 
     public void cmbIdOnAction(ActionEvent actionEvent) {
         txtAddress.setDisable(false);
-        txtId.setDisable(false);
+        txtId.setDisable(true);
         txtName.setDisable(false);
         txtSalary.setDisable(false);
         btnUpdate.setDisable(false);
         btnDelete.setDisable(false);
+
         CustomerDTO customerDTO = customerBo.getItem(cmbId.getValue());
         txtSalary.setText(String.valueOf(customerDTO.getSalary()));
         txtId.setText(customerDTO.getId());
@@ -203,7 +204,7 @@ public class CustomerController {
     private void initUi(){
         txtAddress.clear();
         txtId.clear();
-        txtId.clear();
+        txtName.clear();
         txtSalary.clear();
         txtAddress.setDisable(true);
         txtId.setDisable(true);
