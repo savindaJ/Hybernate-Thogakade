@@ -4,15 +4,25 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import javafx.animation.ScaleTransition;
+import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
+import javafx.stage.Stage;
 import javafx.util.Duration;
+
+import java.io.IOException;
+import java.util.Objects;
 
 public class CustomerController {
     public AnchorPane root;
@@ -31,6 +41,20 @@ public class CustomerController {
     public TableColumn colAddress;
     public TableColumn colSalary;
 
+    @FXML
+    void initialize(){
+        initUi();
+        setCellValueFactory();
+    }
+
+    private void setCellValueFactory() {
+        colName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        colAddress.setCellValueFactory(new PropertyValueFactory<>("address"));
+        colSalary.setCellValueFactory(new PropertyValueFactory<>("salary"));
+        colId.setCellValueFactory(new PropertyValueFactory<>("id"));
+    }
+
+
     public void btnSaveOnAction(ActionEvent actionEvent) {
     }
 
@@ -46,7 +70,20 @@ public class CustomerController {
     public void btnAddNewOnAction(ActionEvent actionEvent) {
     }
 
-    public void btnBackOnAction(MouseEvent event) {
+    public void btnBackOnAction(MouseEvent event) throws IOException {
+        Parent root = null;
+        root = FXMLLoader.load(Objects.requireNonNull(this.getClass().getResource("/view/home_form.fxml")));
+        if (root != null) {
+            Scene subScene = new Scene(root);
+            Stage primaryStage = (Stage) this.root.getScene().getWindow();
+            primaryStage.setScene(subScene);
+            primaryStage.centerOnScreen();
+
+            TranslateTransition tt = new TranslateTransition(Duration.millis(350), subScene.getRoot());
+            tt.setFromX(-subScene.getWidth());
+            tt.setToX(0);
+            tt.play();
+        }
     }
 
     public void mouseEnterd(MouseEvent event) {
@@ -78,5 +115,20 @@ public class CustomerController {
             icon.setEffect(null);
         }
 
+    }
+
+    private void initUi(){
+        txtAddress.clear();
+        txtId.clear();
+        txtId.clear();
+        txtSalary.clear();
+        txtAddress.setDisable(true);
+        txtId.setDisable(true);
+        txtId.setDisable(true);
+        txtSalary.setDisable(true);
+        btnSave.setDisable(true);
+        txtName.setDisable(true);
+        btnDelete.setDisable(true);
+        btnUpdate.setDisable(true);
     }
 }

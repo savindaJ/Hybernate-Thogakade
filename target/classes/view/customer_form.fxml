@@ -48,7 +48,7 @@
             <TableColumn fx:id="colSalary" minWidth="0.0" prefWidth="170.0" text="Salry" />
         </columns>
       </TableView>
-      <ImageView fitHeight="43.0" fitWidth="56.0" layoutX="14.0" layoutY="18.0" onMouseClicked="#btnBackOnAction" onMouseEntered="#mouseEnterd" onMouseExited="#mouseExit" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="43.0" fitWidth="56.0" layoutX="14.0" layoutY="2.0" onMouseClicked="#btnBackOnAction" onMouseEntered="#mouseEnterd" onMouseExited="#mouseExit" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../assets/back.png" />
          </image>
