@@ -1,6 +1,7 @@
 package lk.ijse.thogakade.dao;
 
 import lk.ijse.thogakade.bo.custom.impl.CustomerBOImpl;
+import lk.ijse.thogakade.dao.custom.impl.CustomerDAOImpl;
 import lk.ijse.thogakade.dao.custom.impl.ItemDAOImpl;
 import lk.ijse.thogakade.dao.custom.impl.OrderDetailDAOImpl;
 import lk.ijse.thogakade.dao.custom.impl.OrdersDAOImpl;
@@ -24,7 +25,7 @@ public class DAOFactory {
             case ITEMDAO:
                 return (T) new ItemDAOImpl();
             case CUSTOMERDAO:
-                return (T) new CustomerBOImpl();
+                return (T) new CustomerDAOImpl();
             case ORDERDAO:
                 return (T) new OrdersDAOImpl();
             case ORDERDETAILDAO:
