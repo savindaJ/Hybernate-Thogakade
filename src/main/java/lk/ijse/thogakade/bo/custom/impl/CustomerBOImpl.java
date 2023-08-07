@@ -22,7 +22,12 @@ public class CustomerBOImpl implements CustomerBo {
 
     @Override
     public boolean update(CustomerDTO dto) {
-        return false;
+        return customerDAO.update(new Customer(
+                dto.getName(),
+                dto.getAddress(),
+                dto.getSalary(),
+                dto.getId())
+        );
     }
 
     @Override
@@ -46,6 +51,12 @@ public class CustomerBOImpl implements CustomerBo {
 
     @Override
     public CustomerDTO getItem(String id) {
-        return null;
+        Customer item = customerDAO.getItem(id);
+        return new CustomerDTO(
+                item.getName(),
+                item.getAddress(),
+                item.getSalary(),
+                item.getId()
+        );
     }
 }

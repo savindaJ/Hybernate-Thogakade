@@ -25,8 +25,12 @@ public class CustomerDAOImpl implements CustomerDAO {
 
     @Override
     public boolean update(Customer entity) {
-        // toDO : i will start development !
-        return false;
+        Session session = StandardConfig.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
+        session.update(entity);
+        transaction.commit();
+        session.close();
+        return true;
     }
 
     @Override
@@ -49,6 +53,11 @@ public class CustomerDAOImpl implements CustomerDAO {
 
     @Override
     public Customer getItem(String id) {
-        return null;
+        Session session = StandardConfig.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
+        Customer customer = session.get(Customer.class, id);
+        transaction.commit();
+        session.close();
+        return customer;
     }
 }

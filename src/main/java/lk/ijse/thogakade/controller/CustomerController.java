@@ -60,7 +60,6 @@ public class CustomerController {
     void initialize(){
         initUi();
         setCellValueFactory();
-        btnUpdate.setDisable(false);
         fillTableAndCmd();
     }
 
@@ -110,12 +109,33 @@ public class CustomerController {
     }
 
     public void btnUpdateOnAction(ActionEvent actionEvent) {
+        setDetail();
+        boolean update = customerBo.update(new CustomerDTO(name, address, salary, id));
+        if (update){
+            new CustomAlert(Alert.AlertType.CONFIRMATION,"Update ","Updated !","Update successful !").show();
+        }else {
+            new CustomAlert(Alert.AlertType.ERROR,"Update ","Not Update !","Update not successful !").show();
+        }
+        fillTableAndCmd();
+        initUi();
     }
 
     public void btnDeleteOnAction(ActionEvent actionEvent) {
     }
 
     public void cmbIdOnAction(ActionEvent actionEvent) {
+        txtAddress.setDisable(false);
+        txtId.setDisable(false);
+        txtName.setDisable(false);
+        txtSalary.setDisable(false);
+        btnUpdate.setDisable(false);
+        btnDelete.setDisable(false);
+        CustomerDTO customerDTO = customerBo.getItem(cmbId.getValue());
+        txtSalary.setText(String.valueOf(customerDTO.getSalary()));
+        txtId.setText(customerDTO.getId());
+        txtAddress.setText(customerDTO.getAddress());
+        txtName.setText(customerDTO.getName());
+        txtName.requestFocus();
     }
 
     public void btnAddNewOnAction(ActionEvent actionEvent) {
