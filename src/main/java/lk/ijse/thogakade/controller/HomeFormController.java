@@ -32,7 +32,7 @@ public class HomeFormController {
 
             switch (view.getId()){
                 case "viewOrders":
-                    path = "/view/";
+                    path = "/view/order_frm.fxml";
                     lblStatus.setText("Go to Order Form");
                     break;
                 case "viewCustomer":
