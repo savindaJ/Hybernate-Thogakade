@@ -7,7 +7,6 @@ import lk.ijse.thogakade.entity.Orders;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
-import org.hibernate.criterion.Order;
 
 public class StandardConfig {
     private static final SessionFactory factory;

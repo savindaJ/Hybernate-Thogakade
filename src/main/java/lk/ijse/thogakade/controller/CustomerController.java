@@ -68,6 +68,15 @@ public class CustomerController {
     }
 
     public void btnAddNewOnAction(ActionEvent actionEvent) {
+        txtAddress.setDisable(false);
+        txtId.setDisable(false);
+        txtId.setDisable(false);
+        txtSalary.setDisable(false);
+        btnSave.setDisable(false);
+        txtName.setDisable(false);
+        txtName.requestFocus();
+        btnUpdate.setDisable(true);
+        btnDelete.setDisable(true);
     }
 
     public void btnBackOnAction(MouseEvent event) throws IOException {
