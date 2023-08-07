@@ -41,7 +41,7 @@ public class CustomerController {
     public JFXButton btnSave;
     public JFXButton btnUpdate;
     public JFXButton btnDelete;
-    public JFXComboBox cmbId;
+    public JFXComboBox<String> cmbId;
     public JFXButton btnAddNew;
     public TableView<CustomerTM> tblCustomer;
     public TableColumn<? extends Object, ? extends Object> colId;
@@ -56,12 +56,15 @@ public class CustomerController {
         initUi();
         setCellValueFactory();
         btnUpdate.setDisable(false);
-        fillTable();
+        fillTableAndCmd();
     }
 
-    private void fillTable() {
+
+    private void fillTableAndCmd() {
+        ObservableList<String> ids = FXCollections.observableArrayList();
         ObservableList<CustomerTM> customerTMS = FXCollections.observableArrayList();
         for (CustomerDTO customerDTO : customerBo.getAll()) {
+            ids.add(customerDTO.getId());
             customerTMS.add(new CustomerTM(
                     customerDTO.getName(),
                     customerDTO.getAddress(),
@@ -70,6 +73,7 @@ public class CustomerController {
             );
         }
         tblCustomer.setItems(customerTMS);
+        cmbId.setItems(ids);
     }
 
     private void setCellValueFactory() {
