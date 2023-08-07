@@ -59,7 +59,6 @@ public class CustomerController {
         fillTableAndCmd();
     }
 
-
     private void fillTableAndCmd() {
         ObservableList<String> ids = FXCollections.observableArrayList();
         ObservableList<CustomerTM> customerTMS = FXCollections.observableArrayList();
@@ -101,7 +100,6 @@ public class CustomerController {
     }
 
     public void btnUpdateOnAction(ActionEvent actionEvent) {
-        new CustomAlert(Alert.AlertType.CONFIRMATION,"Delete ","Deleted !","not delete !").show();
     }
 
     public void btnDeleteOnAction(ActionEvent actionEvent) {

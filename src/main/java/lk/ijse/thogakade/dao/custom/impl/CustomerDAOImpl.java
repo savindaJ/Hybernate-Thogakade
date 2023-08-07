@@ -16,7 +16,9 @@ public class CustomerDAOImpl implements CustomerDAO {
     {
         session = StandardConfig.getInstance().getSession();
     }
-    Session session;
+
+    private final Session session;
+
     @Override
     public boolean save(Customer entity) {
         Transaction transaction = session.beginTransaction();
