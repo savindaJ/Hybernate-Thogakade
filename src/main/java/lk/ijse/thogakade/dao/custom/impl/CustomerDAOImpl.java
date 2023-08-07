@@ -15,17 +15,17 @@ public class CustomerDAOImpl implements CustomerDAO {
 
     @Override
     public boolean save(Customer entity) {
-        Session session1 = StandardConfig.getInstance().getSession();
-        Transaction transaction = session1.beginTransaction();
-        Customer customer = new Customer(entity.getName(), entity.getAddress(), entity.getSalary(), entity.getId());
-        Serializable save = session1.save(customer);
+        Session session = StandardConfig.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
+        Serializable save = session.save(entity);
         transaction.commit();
-        session1.close();
+        session.close();
         return save != null;
     }
 
     @Override
     public boolean update(Customer entity) {
+        // toDO : i will start development !
         return false;
     }
 
