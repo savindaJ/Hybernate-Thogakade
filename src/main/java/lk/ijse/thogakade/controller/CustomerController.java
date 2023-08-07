@@ -10,6 +10,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -20,6 +21,10 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import lk.ijse.thogakade.bo.BoFactory;
+import lk.ijse.thogakade.bo.custom.CustomerBo;
+import lk.ijse.thogakade.dto.CustomerDTO;
+import lk.ijse.thogakade.util.CustomAlert;
 
 import java.io.IOException;
 import java.util.Objects;
@@ -41,10 +46,13 @@ public class CustomerController {
     public TableColumn colAddress;
     public TableColumn colSalary;
 
+    private final CustomerBo customerBo = BoFactory.getInstance().getBo(BoFactory.BOTypes.CUSTOMER);
+
     @FXML
     void initialize(){
         initUi();
         setCellValueFactory();
+        btnUpdate.setDisable(false);
     }
 
     private void setCellValueFactory() {
@@ -56,10 +64,20 @@ public class CustomerController {
 
 
     public void btnSaveOnAction(ActionEvent actionEvent) {
+        String name = txtName.getText();
+        String id = txtId.getText();
+        Double salary= Double.valueOf(txtSalary.getText());
+        String address = txtAddress.getText();
+
+        boolean save = customerBo.save(new CustomerDTO(name, address, salary, id));
+
+        if (save){
+
+        }
     }
 
     public void btnUpdateOnAction(ActionEvent actionEvent) {
-    }
+        new CustomAlert(Alert.AlertType.CONFIRMATION,"Delete ","Deleted !","not delete !").show();    }
 
     public void btnDeleteOnAction(ActionEvent actionEvent) {
     }
