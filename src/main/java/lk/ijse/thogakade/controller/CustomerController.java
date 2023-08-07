@@ -72,12 +72,15 @@ public class CustomerController {
         boolean save = customerBo.save(new CustomerDTO(name, address, salary, id));
 
         if (save){
-
+            new CustomAlert(Alert.AlertType.CONFIRMATION,"Save ","Saved !","Save successful !").show();
+        }else {
+            new CustomAlert(Alert.AlertType.ERROR,"Save ","Not Saved !","Save not successful !").show();
         }
     }
 
     public void btnUpdateOnAction(ActionEvent actionEvent) {
-        new CustomAlert(Alert.AlertType.CONFIRMATION,"Delete ","Deleted !","not delete !").show();    }
+        new CustomAlert(Alert.AlertType.CONFIRMATION,"Delete ","Deleted !","not delete !").show();
+    }
 
     public void btnDeleteOnAction(ActionEvent actionEvent) {
     }
