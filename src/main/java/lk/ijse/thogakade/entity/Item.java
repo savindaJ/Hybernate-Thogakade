@@ -17,8 +17,8 @@ public class Item {
     @Id
     @Column(name = "code",length = 30)
     String itemCode;
-    @Column(name = "ItemName",nullable = false)
-    String name;
+    @Column(name = "Item_description",nullable = false)
+    String ItemDescription;
     @Column(name = "ItemPrice",nullable = false)
     Double price;
     @Column(name = "ItemQty",nullable = false)
