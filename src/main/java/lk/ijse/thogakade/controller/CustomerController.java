@@ -60,7 +60,16 @@ public class CustomerController {
     void initialize(){
         initUi();
         setCellValueFactory();
-        fillTableAndCmd();
+        fillTable();
+        setIds();
+    }
+
+    private void setIds() {
+        ObservableList<String> ids = FXCollections.observableArrayList();
+        for (CustomerDTO customerDTO : customerBo.getAll()) {
+            ids.add(customerDTO.getId());
+        }
+        cmbId.setItems(ids);
     }
 
     void setDetail(){
@@ -70,11 +79,9 @@ public class CustomerController {
          address = txtAddress.getText();
     }
 
-    private void fillTableAndCmd() {
-        ObservableList<String> ids = FXCollections.observableArrayList();
+    private void fillTable() {
         ObservableList<CustomerTM> customerTMS = FXCollections.observableArrayList();
         for (CustomerDTO customerDTO : customerBo.getAll()) {
-            ids.add(customerDTO.getId());
             customerTMS.add(new CustomerTM(
                     customerDTO.getName(),
                     customerDTO.getAddress(),
@@ -83,7 +90,6 @@ public class CustomerController {
             );
         }
         tblCustomer.setItems(customerTMS);
-        cmbId.setItems(ids);
     }
 
     private void setCellValueFactory() {
@@ -95,17 +101,14 @@ public class CustomerController {
 
 
     public void btnSaveOnAction(ActionEvent actionEvent) {
-
         setDetail();
-
         boolean save = customerBo.save(new CustomerDTO(name, address, salary, id));
-
         if (save){
             new CustomAlert(Alert.AlertType.CONFIRMATION,"Save ","Saved !","Save successful !").show();
         }else {
             new CustomAlert(Alert.AlertType.ERROR,"Save ","Not Saved !","Save not successful !").show();
         }
-        fillTableAndCmd();
+        fillTable();
     }
 
     public void btnUpdateOnAction(ActionEvent actionEvent) {
@@ -116,7 +119,7 @@ public class CustomerController {
         }else {
             new CustomAlert(Alert.AlertType.ERROR,"Update ","Not Update !","Update not successful !").show();
         }
-        fillTableAndCmd();
+        fillTable();
         initUi();
     }
 
