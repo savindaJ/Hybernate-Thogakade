@@ -1,14 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="lk.ijse.thogakade.controller.HomeFormController"
-            prefHeight="400.0" prefWidth="600.0">
 
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.thogakade.controller.HomeFormController">
+   <children>
+      <Label layoutX="274.0" layoutY="14.0" text="Menu" textFill="#4400d7">
+         <font>
+            <Font name="System Bold" size="19.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="65.0" fitWidth="65.0" layoutX="128.0" layoutY="180.0" onMouseClicked="#btnCustomerOnAction" onMouseEntered="#mouseEnterde" onMouseExited="#mouseExsit" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../assets/customer.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="65.0" fitWidth="65.0" layoutX="263.0" layoutY="180.0" onMouseClicked="#btnItemOnAction" onMouseEntered="#mouseEnterde" onMouseExited="#mouseExsit" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../assets/item.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="65.0" fitWidth="65.0" layoutX="408.0" layoutY="180.0" onMouseClicked="#btnOrderOnAction" onMouseEntered="#mouseEnterde" onMouseExited="#mouseExsit" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../assets/place_order.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="lblStatus" alignment="CENTER" contentDisplay="CENTER" layoutX="77.0" layoutY="347.0" prefHeight="17.0" prefWidth="446.0" text="Home">
+         <font>
+            <Font name="System Bold" size="19.0" />
+         </font>
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop color="#f82929" />
+                  <Stop color="#4d29ff" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </textFill>
+      </Label>
+      <Label contentDisplay="CENTER" layoutX="230.0" layoutY="76.0" text="stock managemant system" />
+   </children>
 </AnchorPane>
