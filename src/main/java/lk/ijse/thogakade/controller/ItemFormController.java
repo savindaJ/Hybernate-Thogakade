@@ -18,6 +18,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import lk.ijse.thogakade.bo.BoFactory;
+import lk.ijse.thogakade.bo.custom.ItemBO;
 
 import java.io.IOException;
 import java.util.Objects;
@@ -37,6 +39,7 @@ public class ItemFormController {
     public TableColumn colItemName;
     public TableColumn colQty;
     public TableColumn colPrice;
+    private final ItemBO itemBO = BoFactory.getInstance().getBo(BoFactory.BOTypes.ITEM);
 
     public void btnSaveOnAction(ActionEvent actionEvent) {
     }
