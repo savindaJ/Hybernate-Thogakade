@@ -158,11 +158,6 @@
                 <Cursor fx:constant="HAND" />
             </cursor>
         </JFXButton>
-        <JFXButton buttonType="RAISED" layoutX="568.0" layoutY="494.0" onAction="#btnBackOnAction" prefHeight="33.0" prefWidth="66.0" style="-fx-background-color: #3498db;" text="Back">
-            <cursor>
-                <Cursor fx:constant="HAND" />
-            </cursor>
-        </JFXButton>
       <Label fx:id="lblNetTotal" layoutX="46.0" layoutY="508.0" prefHeight="17.0" prefWidth="101.0">
          <font>
             <Font size="20.0" />
