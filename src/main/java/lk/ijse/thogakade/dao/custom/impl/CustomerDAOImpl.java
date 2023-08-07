@@ -13,19 +13,14 @@ import java.util.List;
 
 public class CustomerDAOImpl implements CustomerDAO {
 
-    {
-        session = StandardConfig.getInstance().getSession();
-    }
-
-    private final Session session;
-
     @Override
     public boolean save(Customer entity) {
-        Transaction transaction = session.beginTransaction();
+        Session session1 = StandardConfig.getInstance().getSession();
+        Transaction transaction = session1.beginTransaction();
         Customer customer = new Customer(entity.getName(), entity.getAddress(), entity.getSalary(), entity.getId());
-        Serializable save = session.save(customer);
+        Serializable save = session1.save(customer);
         transaction.commit();
-        session.close();
+        session1.close();
         return save != null;
     }
 
@@ -41,12 +36,14 @@ public class CustomerDAOImpl implements CustomerDAO {
 
     @Override
     public List<Customer> getAll() {
+        Session session = StandardConfig.getInstance().getSession();
         Transaction transaction = session.beginTransaction();
         CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
         CriteriaQuery<Customer> query = criteriaBuilder.createQuery(Customer.class);
         query.from(Customer.class);
         List<Customer> resultList = session.createQuery(query).getResultList();
         transaction.commit();
+        session.close();
         return resultList;
     }
 

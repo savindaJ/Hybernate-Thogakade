@@ -49,6 +49,11 @@ public class CustomerController {
     public TableColumn<? extends Object, ? extends Object> colAddress;
     public TableColumn<? extends Object, ? extends Object> colSalary;
 
+    private String name;
+    private String id;
+    private Double salary;
+    private String address;
+
     private final CustomerBo customerBo = BoFactory.getInstance().getBo(BoFactory.BOTypes.CUSTOMER);
 
     @FXML
@@ -57,6 +62,13 @@ public class CustomerController {
         setCellValueFactory();
         btnUpdate.setDisable(false);
         fillTableAndCmd();
+    }
+
+    void setDetail(){
+         name = txtName.getText();
+         id = txtId.getText();
+         salary= Double.valueOf(txtSalary.getText());
+         address = txtAddress.getText();
     }
 
     private void fillTableAndCmd() {
@@ -84,10 +96,8 @@ public class CustomerController {
 
 
     public void btnSaveOnAction(ActionEvent actionEvent) {
-        String name = txtName.getText();
-        String id = txtId.getText();
-        Double salary= Double.valueOf(txtSalary.getText());
-        String address = txtAddress.getText();
+
+        setDetail();
 
         boolean save = customerBo.save(new CustomerDTO(name, address, salary, id));
 
