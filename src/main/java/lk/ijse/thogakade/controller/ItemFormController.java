@@ -42,7 +42,7 @@ public class ItemFormController {
     public JFXButton btnUpdate;
     public JFXButton btnDelete;
     public JFXComboBox <String> cmbId;
-    public TableView tblItem;
+    public TableView <ItemTM> tblItem;
     public TableColumn<? extends Object, ? extends Object> colCode;
     public TableColumn<? extends Object, ? extends Object> colItemName;
     public TableColumn<? extends Object, ? extends Object> colQty;
@@ -126,6 +126,11 @@ public class ItemFormController {
 
     public void btnUpdateOnAction(ActionEvent actionEvent) {
         setDetail();
+        if (itemBO.update(new ItemDTO(cmbId.getValue(),description,price,qty)))
+            new CustomAlert(Alert.AlertType.CONFIRMATION,"Update ","Updated !","Item Update successful !").show();
+        else
+            new CustomAlert(Alert.AlertType.ERROR,"Update ","Not Update !","Update not successful !").show();
+
     }
 
     public void btnDeleteOnAction(ActionEvent actionEvent) {

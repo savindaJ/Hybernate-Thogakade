@@ -1,5 +1,6 @@
 package lk.ijse.thogakade.dao.custom.impl;
 
+import javafx.scene.control.Alert;
 import lk.ijse.thogakade.configaration.StandardConfig;
 import lk.ijse.thogakade.dao.custom.ItemDAO;
 import lk.ijse.thogakade.entity.Item;
@@ -24,7 +25,15 @@ public class ItemDAOImpl implements ItemDAO {
 
     @Override
     public boolean update(Item entity) {
-        return false;
+        try (Session session = StandardConfig.getInstance().getSession()) {
+            Transaction transaction = session.beginTransaction();
+            session.update(entity);
+            transaction.commit();
+            return true;
+        }catch (Exception e){
+            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
+            return false;
+        }
     }
 
     @Override
