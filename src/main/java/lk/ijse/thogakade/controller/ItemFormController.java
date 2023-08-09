@@ -41,7 +41,7 @@ public class ItemFormController {
     public JFXButton btnSave;
     public JFXButton btnUpdate;
     public JFXButton btnDelete;
-    public JFXComboBox cmbId;
+    public JFXComboBox <String> cmbId;
     public TableView tblItem;
     public TableColumn<? extends Object, ? extends Object> colCode;
     public TableColumn<? extends Object, ? extends Object> colItemName;
@@ -60,6 +60,15 @@ public class ItemFormController {
         setCellValueFactory();
         fillTable();
         btnUpdate.setDisable(false);
+        setItemIDs();
+    }
+
+    private void setItemIDs() {
+        ObservableList<String> idList = FXCollections.observableArrayList();
+        for (ItemDTO itemDTO : itemBO.getAll()) {
+            idList.add(itemDTO.getItemCode());
+        }
+        cmbId.setItems(idList);
     }
 
     private void fillTable() {
@@ -120,6 +129,10 @@ public class ItemFormController {
     }
 
     public void btnDeleteOnAction(ActionEvent actionEvent) {
+        if (itemBO.delete(cmbId.getValue()))
+            new CustomAlert(Alert.AlertType.CONFIRMATION,"Delete ","Deleted !","Item Deleted successful !").show();
+        else
+            new CustomAlert(Alert.AlertType.ERROR,"Delete ","Not Deleted !","Delete not successful !").show();
     }
 
     public void btnAddNewOnAction(ActionEvent actionEvent) {

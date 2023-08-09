@@ -30,7 +30,7 @@ public class ItemBOImpl implements ItemBO {
 
     @Override
     public boolean delete(String id) {
-        return false;
+        return itemDAO.delete(id);
     }
 
     @Override

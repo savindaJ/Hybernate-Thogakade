@@ -29,7 +29,15 @@ public class ItemDAOImpl implements ItemDAO {
 
     @Override
     public boolean delete(String id) {
-        return false;
+        try (Session session = StandardConfig.getInstance().getSession()) {
+            Transaction transaction = session.beginTransaction();
+            Item item = session.get(Item.class, id);
+            session.delete(item);
+            transaction.commit();
+            return true;
+        }catch (Exception exception){
+            return false;
+        }
     }
 
     @Override
