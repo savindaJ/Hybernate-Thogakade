@@ -64,6 +64,11 @@ public class ItemDAOImpl implements ItemDAO {
 
     @Override
     public Item getItem(String id) {
-        return null;
+        try (Session session = StandardConfig.getInstance().getSession()) {
+            Transaction transaction = session.beginTransaction();
+            Item item = session.get(Item.class, id);
+            transaction.commit();
+            return item;
+        }
     }
 }

@@ -59,7 +59,6 @@ public class ItemFormController {
         initUI();
         setCellValueFactory();
         fillTable();
-        btnUpdate.setDisable(false);
         setItemIDs();
     }
 
@@ -152,6 +151,13 @@ public class ItemFormController {
     public void cmbIdOnAction(ActionEvent actionEvent) {
         btnDelete.setDisable(false);
         btnUpdate.setDisable(false);
+
+        ItemDTO item = itemBO.getItem(cmbId.getValue());
+
+        txtName.setText(item.getDescription());
+        txtCode.setText(item.getItemCode());
+        txtQty.setText(String.valueOf(item.getQty()));
+        txtItemPrice.setText(String.valueOf(item.getPrice()));
     }
 
     public void btnBackClicked(MouseEvent event) throws IOException {

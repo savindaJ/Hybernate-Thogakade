@@ -54,6 +54,12 @@ public class ItemBOImpl implements ItemBO {
 
     @Override
     public ItemDTO getItem(String id) {
-        return null;
+        Item item = itemDAO.getItem(id);
+        return new ItemDTO(
+                item.getItemCode(),
+                item.getItemDescription(),
+                item.getPrice(),
+                item.getQty()
+        );
     }
 }
