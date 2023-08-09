@@ -24,4 +24,11 @@ public class Item {
 
     @ManyToOne(cascade = CascadeType.ALL)
     Orders orders;
+
+    public Item(String itemCode, String itemDescription, Double price, Integer qty) {
+        this.itemCode = itemCode;
+        ItemDescription = itemDescription;
+        this.price = price;
+        this.qty = qty;
+    }
 }

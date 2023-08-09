@@ -15,7 +15,12 @@ public class ItemBOImpl implements ItemBO {
 
     @Override
     public boolean save(ItemDTO dto) {
-        return false;
+       return itemDAO.save(new Item(
+                dto.getItemCode(),
+                dto.getItemCode(),
+                dto.getPrice(),
+                dto.getQty())
+        );
     }
 
     @Override
