@@ -12,6 +12,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -26,6 +27,7 @@ import lk.ijse.thogakade.bo.BoFactory;
 import lk.ijse.thogakade.bo.custom.ItemBO;
 import lk.ijse.thogakade.dto.ItemDTO;
 import lk.ijse.thogakade.dto.tm.ItemTM;
+import lk.ijse.thogakade.util.CustomAlert;
 
 import java.io.IOException;
 import java.util.Objects;
@@ -47,11 +49,17 @@ public class ItemFormController {
     public TableColumn<? extends Object, ? extends Object> colPrice;
     private final ItemBO itemBO = BoFactory.getInstance().getBo(BoFactory.BOTypes.ITEM);
 
+    private String itemCode;
+    private String description;
+    private Double price;
+    private Integer qty;
+
     @FXML
     void initialize(){
         initUI();
         setCellValueFactory();
         fillTable();
+        btnUpdate.setDisable(false);
     }
 
     private void fillTable() {
@@ -59,7 +67,7 @@ public class ItemFormController {
         for (ItemDTO itemDTO : itemBO.getAll()) {
             itemTMS.add(new ItemTM(
                     itemDTO.getItemCode(),
-                    itemDTO.getName(),
+                    itemDTO.getDescription(),
                     itemDTO.getPrice(),
                     itemDTO.getQty())
             );
@@ -88,10 +96,27 @@ public class ItemFormController {
         btnDelete.setDisable(true);
     }
 
+
+    private void setDetail() {
+       description = txtName.getText();
+       itemCode = txtCode.getText();
+       price = Double.valueOf(txtItemPrice.getText());
+       qty = Integer.valueOf(txtQty.getText());
+    }
+
     public void btnSaveOnAction(ActionEvent actionEvent) {
+        setDetail();
+        boolean save = itemBO.save(new ItemDTO(itemCode, description, price, qty));
+        if (save){
+            new CustomAlert(Alert.AlertType.CONFIRMATION,"Save ","Saved !","Item Save successful !").show();
+        }else {
+            new CustomAlert(Alert.AlertType.ERROR,"Save ","Not Saved !","Save not successful !").show();
+        }
+        fillTable();
     }
 
     public void btnUpdateOnAction(ActionEvent actionEvent) {
+        setDetail();
     }
 
     public void btnDeleteOnAction(ActionEvent actionEvent) {

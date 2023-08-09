@@ -5,6 +5,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -22,12 +24,12 @@ public class Item {
     @Column(name = "ItemQty",nullable = false)
     Integer qty;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    Orders orders;
+    @ManyToMany(cascade = CascadeType.ALL)
+    List<Orders> orders = new ArrayList<>();
 
     public Item(String itemCode, String itemDescription, Double price, Integer qty) {
         this.itemCode = itemCode;
-        ItemDescription = itemDescription;
+        this.ItemDescription = itemDescription;
         this.price = price;
         this.qty = qty;
     }
