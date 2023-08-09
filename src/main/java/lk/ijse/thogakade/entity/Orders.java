@@ -21,9 +21,12 @@ public class Orders {
     @Column(name = "order_date",nullable = false)
     Date date;
 
-    /*@ManyToMany(cascade = CascadeType.ALL)
-    List<Item> items = new ArrayList<>();*/
-    @ManyToOne(cascade = CascadeType.ALL)
-    Item item;
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+            @JoinTable(
+                    name = "order_detail",
+                    joinColumns = @JoinColumn(name = "orders_id"),
+                    inverseJoinColumns = @JoinColumn(name = "code")
+            )
+    List<Item> items;
 
 }

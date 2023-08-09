@@ -39,7 +39,7 @@ public class ItemBOImpl implements ItemBO {
         for (Item item : itemDAO.getAll()) {
             itemDTOLIst.add(new ItemDTO(
                     item.getItemCode(),
-                    item.getItemCode(),
+                    item.getItemDescription(),
                     item.getPrice(),
                     item.getQty())
             );

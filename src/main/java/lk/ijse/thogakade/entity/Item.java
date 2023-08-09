@@ -24,7 +24,7 @@ public class Item {
     @Column(name = "ItemQty",nullable = false)
     Integer qty;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(mappedBy = "items")
     List<Orders> orders = new ArrayList<>();
 
     public Item(String itemCode, String itemDescription, Double price, Integer qty) {
