@@ -106,6 +106,7 @@ public class CustomerController {
             new CustomAlert(Alert.AlertType.ERROR,"Save ","Not Saved !","Save not successful !").show();
         }
         fillTable();
+        initUi();
     }
 
     public void btnUpdateOnAction(ActionEvent actionEvent) {

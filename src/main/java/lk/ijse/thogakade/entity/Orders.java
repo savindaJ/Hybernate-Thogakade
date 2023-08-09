@@ -21,6 +21,6 @@ public class Orders {
     @Column(name = "order_date",nullable = false)
     Date date;
     @ManyToMany(cascade = CascadeType.ALL)
-    List<Item> reserveList = new ArrayList<>();
+    List<Item> items = new ArrayList<>();
 
 }
