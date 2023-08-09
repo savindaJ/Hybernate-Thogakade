@@ -121,6 +121,7 @@ public class ItemFormController {
             new CustomAlert(Alert.AlertType.ERROR,"Save ","Not Saved !","Save not successful !").show();
         }
         fillTable();
+        initUI();
     }
 
     public void btnUpdateOnAction(ActionEvent actionEvent) {
@@ -129,7 +130,8 @@ public class ItemFormController {
             new CustomAlert(Alert.AlertType.CONFIRMATION,"Update ","Updated !","Item Update successful !").show();
         else
             new CustomAlert(Alert.AlertType.ERROR,"Update ","Not Update !","Update not successful !").show();
-
+        fillTable();
+        initUI();
     }
 
     public void btnDeleteOnAction(ActionEvent actionEvent) {
@@ -137,6 +139,7 @@ public class ItemFormController {
             new CustomAlert(Alert.AlertType.CONFIRMATION,"Delete ","Deleted !","Item Deleted successful !").show();
         else
             new CustomAlert(Alert.AlertType.ERROR,"Delete ","Not Deleted !","Delete not successful !").show();
+        initUI();
     }
 
     public void btnAddNewOnAction(ActionEvent actionEvent) {
@@ -152,12 +155,19 @@ public class ItemFormController {
         btnDelete.setDisable(false);
         btnUpdate.setDisable(false);
 
+        txtName.setDisable(false);
+        txtQty.setDisable(false);
+        txtItemPrice.setDisable(false);
+
+        txtName.requestFocus();
+
         ItemDTO item = itemBO.getItem(cmbId.getValue());
 
         txtName.setText(item.getDescription());
         txtCode.setText(item.getItemCode());
         txtQty.setText(String.valueOf(item.getQty()));
         txtItemPrice.setText(String.valueOf(item.getPrice()));
+
     }
 
     public void btnBackClicked(MouseEvent event) throws IOException {
