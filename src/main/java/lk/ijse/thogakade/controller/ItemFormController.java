@@ -5,6 +5,8 @@ import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import javafx.animation.ScaleTransition;
 import javafx.animation.TranslateTransition;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,6 +14,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -21,6 +24,8 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import lk.ijse.thogakade.bo.BoFactory;
 import lk.ijse.thogakade.bo.custom.ItemBO;
+import lk.ijse.thogakade.dto.ItemDTO;
+import lk.ijse.thogakade.dto.tm.ItemTM;
 
 import java.io.IOException;
 import java.util.Objects;
@@ -36,15 +41,37 @@ public class ItemFormController {
     public JFXButton btnDelete;
     public JFXComboBox cmbId;
     public TableView tblItem;
-    public TableColumn colCode;
-    public TableColumn colItemName;
-    public TableColumn colQty;
-    public TableColumn colPrice;
+    public TableColumn<? extends Object, ? extends Object> colCode;
+    public TableColumn<? extends Object, ? extends Object> colItemName;
+    public TableColumn<? extends Object, ? extends Object> colQty;
+    public TableColumn<? extends Object, ? extends Object> colPrice;
     private final ItemBO itemBO = BoFactory.getInstance().getBo(BoFactory.BOTypes.ITEM);
 
     @FXML
     void initialize(){
         initUI();
+        setCellValueFactory();
+        fillTable();
+    }
+
+    private void fillTable() {
+        ObservableList<ItemTM> itemTMS = FXCollections.observableArrayList();
+        for (ItemDTO itemDTO : itemBO.getAll()) {
+            itemTMS.add(new ItemTM(
+                    itemDTO.getItemCode(),
+                    itemDTO.getName(),
+                    itemDTO.getPrice(),
+                    itemDTO.getQty())
+            );
+        }
+    tblItem.setItems(itemTMS);
+    }
+
+    private void setCellValueFactory() {
+        colCode.setCellValueFactory(new PropertyValueFactory<>("itemCode"));
+        colPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
+        colItemName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        colQty.setCellValueFactory(new PropertyValueFactory<>("qty"));
     }
 
     private void initUI() {
