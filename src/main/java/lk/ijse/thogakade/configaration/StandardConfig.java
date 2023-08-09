@@ -1,9 +1,6 @@
 package lk.ijse.thogakade.configaration;
 
-import lk.ijse.thogakade.entity.Customer;
-import lk.ijse.thogakade.entity.Item;
-import lk.ijse.thogakade.entity.OrderDetail;
-import lk.ijse.thogakade.entity.Orders;
+import lk.ijse.thogakade.entity.*;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;

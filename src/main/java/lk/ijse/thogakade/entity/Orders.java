@@ -3,11 +3,10 @@ package lk.ijse.thogakade.entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -21,6 +20,7 @@ public class Orders {
     String id;
     @Column(name = "order_date",nullable = false)
     Date date;
-    @Column(name = "customer_ID",nullable = false)
-    String customerId;
+
+
+
 }

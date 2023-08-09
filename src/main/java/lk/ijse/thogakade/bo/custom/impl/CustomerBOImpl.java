@@ -1,13 +1,10 @@
 package lk.ijse.thogakade.bo.custom.impl;
 
 import lk.ijse.thogakade.bo.custom.CustomerBo;
-import lk.ijse.thogakade.configaration.StandardConfig;
 import lk.ijse.thogakade.dao.DAOFactory;
 import lk.ijse.thogakade.dao.custom.CustomerDAO;
-import lk.ijse.thogakade.dao.custom.impl.CustomerDAOImpl;
 import lk.ijse.thogakade.dto.CustomerDTO;
 import lk.ijse.thogakade.entity.Customer;
-import org.hibernate.Session;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +14,12 @@ public class CustomerBOImpl implements CustomerBo {
 
     @Override
     public boolean save(CustomerDTO dto) {
-        return customerDAO.save(new Customer(dto.getName(),dto.getAddress(),dto.getSalary(),dto.getId()));
+        return customerDAO.save(new Customer(
+                dto.getName(),
+                dto.getAddress(),
+                dto.getSalary(),
+                dto.getId())
+        );
     }
 
     @Override
