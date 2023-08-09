@@ -20,7 +20,7 @@ public class Orders {
     String id;
     @Column(name = "order_date",nullable = false)
     Date date;
-
-
+    @ManyToMany(cascade = CascadeType.ALL)
+    List<Item> reserveList = new ArrayList<>();
 
 }
