@@ -28,7 +28,7 @@ public class Customer {
 
     @OneToMany(cascade=CascadeType.ALL)
     @JoinColumn(name="Customer_ID")
-    private List<Orders> accounts = new ArrayList<>();
+    private List<Orders> orders = new ArrayList<>();
 
 
    /* @OneToMany(cascade=CascadeType.ALL)
