@@ -15,22 +15,23 @@ import java.util.List;
 @Table(schema = "item")
 public class Item {
     @Id
-    @Column(name = "code",length = 30)
-    String itemCode;
-    @Column(name = "Item_description",nullable = false)
-    String ItemDescription;
-    @Column(name = "ItemPrice",nullable = false)
-    Double price;
-    @Column(name = "ItemQty",nullable = false)
-    Integer qty;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "item_id")
+    private int id;
+    @Column(name = "item_name")
+    private String itemName;
+    @Column(name = "item_quantity")
+    private Integer qty;
+    @Column(name = "unit_price")
+    private Double unitPrice;
 
-    @ManyToMany(mappedBy = "items")
-    List<Orders> orders = new ArrayList<>();
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy =  "item")
+    private List<OrderDetail> orderDetails = new ArrayList<>();
 
-    public Item(String itemCode, String itemDescription, Double price, Integer qty) {
-        this.itemCode = itemCode;
-        this.ItemDescription = itemDescription;
-        this.price = price;
+    public Item(int id, String itemName, Integer qty, Double unitPrice) {
+        this.id = id;
+        this.itemName = itemName;
         this.qty = qty;
+        this.unitPrice = unitPrice;
     }
 }

@@ -65,7 +65,7 @@ public class CustomerController {
     private void setIds() {
         ObservableList<String> ids = FXCollections.observableArrayList();
         for (CustomerDTO customerDTO : customerBo.getAll()) {
-            ids.add(customerDTO.getId());
+            ids.add(String.valueOf(customerDTO.getId()));
         }
         cmbId.setItems(ids);
     }
@@ -99,7 +99,7 @@ public class CustomerController {
 
     public void btnSaveOnAction(ActionEvent actionEvent) {
         setDetail();
-        boolean save = customerBo.save(new CustomerDTO(name, address, salary, id));
+        boolean save = customerBo.save(new CustomerDTO(name, address, salary, Integer.parseInt(id)));
         if (save){
             new CustomAlert(Alert.AlertType.CONFIRMATION,"Save ","Saved !","Save successful !").show();
         }else {
@@ -111,7 +111,7 @@ public class CustomerController {
 
     public void btnUpdateOnAction(ActionEvent actionEvent) {
         setDetail();
-        boolean update = customerBo.update(new CustomerDTO(name, address, salary, id));
+        boolean update = customerBo.update(new CustomerDTO(name, address, salary, Integer.parseInt(id)));
         if (update){
             new CustomAlert(Alert.AlertType.CONFIRMATION,"Update ","Updated !","Update successful !").show();
         }else {
@@ -142,7 +142,7 @@ public class CustomerController {
 
         CustomerDTO customerDTO = customerBo.getItem(cmbId.getValue());
         txtSalary.setText(String.valueOf(customerDTO.getSalary()));
-        txtId.setText(customerDTO.getId());
+        txtId.setText(String.valueOf(customerDTO.getId()));
         txtAddress.setText(customerDTO.getAddress());
         txtName.setText(customerDTO.getName());
         txtName.requestFocus();

@@ -2,9 +2,10 @@ package lk.ijse.thogakade.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
-import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,17 +17,20 @@ import java.util.List;
 public class Orders {
 
     @Id
-    @Column(name = "orders_id",length = 30)
-    String id;
-    @Column(name = "order_date",nullable = false)
-    Date date;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "order_id")
+    private int id;
+    @Column(name = "order_description")
+    private String description;
+    @CreationTimestamp
+    @Column(name = "order_date")
+    private Timestamp orderDateTime;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-            @JoinTable(
-                    name = "order_detail",
-                    joinColumns = @JoinColumn(name = "orders_id"),
-                    inverseJoinColumns = @JoinColumn(name = "code")
-            )
-    List<Item> items;
+    @ManyToOne
+    @JoinColumn(name = "customer_id")
+    private Customer customer;
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "order")
+    private List<OrderDetail> orderDetails = new ArrayList<>();
 
 }

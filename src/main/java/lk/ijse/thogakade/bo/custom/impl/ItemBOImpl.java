@@ -18,8 +18,8 @@ public class ItemBOImpl implements ItemBO {
         return itemDAO.save(new Item(
                 dto.getItemCode(),
                 dto.getDescription(),
-                dto.getPrice(),
-                dto.getQty())
+                dto.getQty(),
+                dto.getPrice())
         );
     }
 
@@ -28,8 +28,8 @@ public class ItemBOImpl implements ItemBO {
         return itemDAO.update(new Item(
                 dto.getItemCode(),
                 dto.getDescription(),
-                dto.getPrice(),
-                dto.getQty())
+                dto.getQty(),
+                dto.getPrice())
         );
     }
 
@@ -43,9 +43,9 @@ public class ItemBOImpl implements ItemBO {
         List<ItemDTO> itemDTOLIst = new ArrayList<>();
         for (Item item : itemDAO.getAll()) {
             itemDTOLIst.add(new ItemDTO(
-                    item.getItemCode(),
-                    item.getItemDescription(),
-                    item.getPrice(),
+                    item.getId(),
+                    item.getItemName(),
+                    item.getUnitPrice(),
                     item.getQty())
             );
         }
@@ -56,9 +56,9 @@ public class ItemBOImpl implements ItemBO {
     public ItemDTO getItem(String id) {
         Item item = itemDAO.getItem(id);
         return new ItemDTO(
-                item.getItemCode(),
-                item.getItemDescription(),
-                item.getPrice(),
+                item.getId(),
+                item.getItemName(),
+                item.getUnitPrice(),
                 item.getQty()
         );
     }

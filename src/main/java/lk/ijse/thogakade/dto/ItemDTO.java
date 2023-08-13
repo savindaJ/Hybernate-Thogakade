@@ -7,7 +7,7 @@ import lombok.Data;
 @AllArgsConstructor
 public class ItemDTO {
 
-   private String itemCode;
+   private Integer itemCode;
    private String description;
    private Double price;
    private Integer qty;

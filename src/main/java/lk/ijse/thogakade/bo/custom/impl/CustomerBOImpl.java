@@ -15,7 +15,7 @@ public class CustomerBOImpl implements CustomerBo {
     @Override
     public boolean save(CustomerDTO dto) {
         return customerDAO.save(new Customer(
-                dto.getName(),
+               dto.getName(),
                 dto.getAddress(),
                 dto.getSalary(),
                 dto.getId())

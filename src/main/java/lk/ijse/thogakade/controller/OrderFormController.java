@@ -19,6 +19,9 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import lk.ijse.thogakade.bo.BoFactory;
+import lk.ijse.thogakade.bo.custom.OrderBO;
+import lk.ijse.thogakade.dto.OrderDTO;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -45,12 +48,22 @@ public class OrderFormController {
     public TableColumn colAction;
     public Label lblNetTotal;
 
+    OrderBO orderBO = BoFactory.getInstance().getBo(BoFactory.BOTypes.ORDER);
     @FXML
     void initialize(){
+//        setCustomerID();
         lblOrderDate.setText(String.valueOf(LocalDate.now()));
     }
 
+    private void setCustomerID() {
+        for (OrderDTO orderDTO : orderBO.getAll()) {
+
+        }
+
+    }
+
     public void cmbCustomerOnAction(ActionEvent actionEvent) {
+
     }
 
     public void cmbItemOnAction(ActionEvent actionEvent) {

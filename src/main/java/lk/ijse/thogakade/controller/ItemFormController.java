@@ -65,7 +65,7 @@ public class ItemFormController {
     private void setItemIDs() {
         ObservableList<String> idList = FXCollections.observableArrayList();
         for (ItemDTO itemDTO : itemBO.getAll()) {
-            idList.add(itemDTO.getItemCode());
+            idList.add(String.valueOf(itemDTO.getItemCode()));
         }
         cmbId.setItems(idList);
     }
@@ -114,7 +114,7 @@ public class ItemFormController {
 
     public void btnSaveOnAction(ActionEvent actionEvent) {
         setDetail();
-        boolean save = itemBO.save(new ItemDTO(itemCode, description, price, qty));
+        boolean save = itemBO.save(new ItemDTO(Integer.parseInt(itemCode), description, price, qty));
         if (save){
             new CustomAlert(Alert.AlertType.CONFIRMATION,"Save ","Saved !","Item Save successful !").show();
         }else {
@@ -126,7 +126,7 @@ public class ItemFormController {
 
     public void btnUpdateOnAction(ActionEvent actionEvent) {
         setDetail();
-        if (itemBO.update(new ItemDTO(cmbId.getValue(),description,price,qty)))
+        if (itemBO.update(new ItemDTO(Integer.parseInt(cmbId.getValue()),description,price,qty)))
             new CustomAlert(Alert.AlertType.CONFIRMATION,"Update ","Updated !","Item Update successful !").show();
         else
             new CustomAlert(Alert.AlertType.ERROR,"Update ","Not Update !","Update not successful !").show();
@@ -164,7 +164,7 @@ public class ItemFormController {
         ItemDTO item = itemBO.getItem(cmbId.getValue());
 
         txtName.setText(item.getDescription());
-        txtCode.setText(item.getItemCode());
+        txtCode.setText(String.valueOf(item.getItemCode()));
         txtQty.setText(String.valueOf(item.getQty()));
         txtItemPrice.setText(String.valueOf(item.getPrice()));
 
