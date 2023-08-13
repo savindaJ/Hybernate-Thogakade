@@ -37,7 +37,7 @@ public class CustomerDAOImpl implements CustomerDAO {
     public boolean delete(String id) {
         Session session = StandardConfig.getInstance().getSession();
         Transaction transaction = session.beginTransaction();
-        Customer customer = session.get(Customer.class, id);
+        Customer customer = session.get(Customer.class, Integer.parseInt(id));
         session.delete(customer);
         transaction.commit();
         session.close();
@@ -61,7 +61,7 @@ public class CustomerDAOImpl implements CustomerDAO {
     public Customer getItem(String id) {
         Session session = StandardConfig.getInstance().getSession();
         Transaction transaction = session.beginTransaction();
-        Customer customer = session.get(Customer.class, id);
+        Customer customer = session.get(Customer.class, Integer.parseInt(id));
         transaction.commit();
         session.close();
         return customer;
