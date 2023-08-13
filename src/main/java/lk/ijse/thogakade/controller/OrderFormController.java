@@ -3,6 +3,8 @@ package lk.ijse.thogakade.controller;
 import com.jfoenix.controls.JFXComboBox;
 import javafx.animation.ScaleTransition;
 import javafx.animation.TranslateTransition;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -21,10 +23,15 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import lk.ijse.thogakade.bo.BoFactory;
 import lk.ijse.thogakade.bo.custom.OrderBO;
+import lk.ijse.thogakade.dao.custom.CustomerDAO;
+import lk.ijse.thogakade.dto.CustomerDTO;
+import lk.ijse.thogakade.dto.ItemDTO;
 import lk.ijse.thogakade.dto.OrderDTO;
+import lk.ijse.thogakade.entity.Customer;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Objects;
 
 public class OrderFormController {
@@ -32,9 +39,9 @@ public class OrderFormController {
     public AnchorPane root;
     public Label lblOrderId;
     public Label lblOrderDate;
-    public JFXComboBox cmbCustomerId;
+    public JFXComboBox<String> cmbCustomerId;
     public Label lblCustomerName;
-    public JFXComboBox cmbItemCode;
+    public JFXComboBox<String> cmbItemCode;
     public Label lblDescription;
     public Label lblUnitPrice;
     public Label lblQtyOnHand;
@@ -51,22 +58,38 @@ public class OrderFormController {
     OrderBO orderBO = BoFactory.getInstance().getBo(BoFactory.BOTypes.ORDER);
     @FXML
     void initialize(){
-//        setCustomerID();
+        setCustomerID();
         lblOrderDate.setText(String.valueOf(LocalDate.now()));
+        setItemIds();
+    }
+
+    private void setItemIds() {
+        ObservableList<String> ids = FXCollections.observableArrayList();
+        for (ItemDTO itemId : orderBO.getItemIds()) {
+            ids.add(String.valueOf(itemId.getItemCode()));
+        }
+        cmbItemCode.setItems(ids);
     }
 
     private void setCustomerID() {
-        for (OrderDTO orderDTO : orderBO.getAll()) {
-
+        ObservableList<String> ids = FXCollections.observableArrayList();
+        for (CustomerDTO customerDTO : orderBO.getCustomerId()) {
+            ids.add(String.valueOf(customerDTO.getId()));
         }
-
+        cmbCustomerId.setItems(ids);
     }
 
     public void cmbCustomerOnAction(ActionEvent actionEvent) {
-
+        CustomerDTO customer = orderBO.getCustomer(cmbCustomerId.getValue());
+        lblCustomerName.setText(customer.getName());
     }
 
     public void cmbItemOnAction(ActionEvent actionEvent) {
+        ItemDTO itemDTO = orderBO.getOrderItem(String.valueOf(cmbItemCode.getValue()));
+        lblDescription.setText(itemDTO.getDescription());
+        lblQtyOnHand.setText(String.valueOf(itemDTO.getQty()));
+        lblUnitPrice.setText(String.valueOf(itemDTO.getPrice()));
+        txtQty.requestFocus();
     }
 
     public void txtQtyOnAction(ActionEvent actionEvent) {
