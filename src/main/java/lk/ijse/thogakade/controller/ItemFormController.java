@@ -140,6 +140,7 @@ public class ItemFormController {
         else
             new CustomAlert(Alert.AlertType.ERROR,"Delete ","Not Deleted !","Delete not successful !").show();
         initUI();
+        fillTable();
     }
 
     public void btnAddNewOnAction(ActionEvent actionEvent) {

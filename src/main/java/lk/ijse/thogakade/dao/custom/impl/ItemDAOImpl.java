@@ -40,7 +40,7 @@ public class ItemDAOImpl implements ItemDAO {
     public boolean delete(String id) {
         try (Session session = StandardConfig.getInstance().getSession()) {
             Transaction transaction = session.beginTransaction();
-            Item item = session.get(Item.class, id);
+            Item item = session.get(Item.class, Integer.parseInt(id));
             session.delete(item);
             transaction.commit();
             return true;
@@ -66,7 +66,7 @@ public class ItemDAOImpl implements ItemDAO {
     public Item getItem(String id) {
         try (Session session = StandardConfig.getInstance().getSession()) {
             Transaction transaction = session.beginTransaction();
-            Item item = session.get(Item.class, id);
+            Item item = session.get(Item.class, Integer.parseInt(id));
             transaction.commit();
             return item;
         }
