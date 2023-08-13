@@ -127,7 +127,7 @@ public class OrderFormController {
                     obList.get(i).setTotal(total);
 
                     tblOrderCart.refresh();
-//                    calculateNetTotal();
+                    calculateNetTotal();
                     return;
                 }
             }
@@ -154,6 +154,7 @@ public class OrderFormController {
     }
 
     private void setRemoveBtnOnAction(Button btn) {
+
         btn.setOnAction((e) -> {
             ButtonType yes = new ButtonType("Yes", ButtonBar.ButtonData.OK_DONE);
             ButtonType no = new ButtonType("No", ButtonBar.ButtonData.CANCEL_CLOSE);
@@ -161,13 +162,16 @@ public class OrderFormController {
             Optional<ButtonType> result = new Alert(Alert.AlertType.INFORMATION, "Are you sure to remove?", yes, no).showAndWait();
 
             if (result.orElse(no) == yes) {
+                try {
+                    int selectedIndex = tblOrderCart.getSelectionModel().getSelectedIndex();
+                    System.out.println(selectedIndex);
+                    obList.remove(selectedIndex);
 
-                int index = tblOrderCart.getSelectionModel().getSelectedIndex();
-                System.out.println(index);
-                obList.remove(index);
-
-                tblOrderCart.refresh();
-                calculateNetTotal();
+                    tblOrderCart.refresh();
+                    calculateNetTotal();
+                }catch (Exception exception){
+                    new Alert(Alert.AlertType.ERROR,"please select delete row... !").show();
+                }
             }
 
         });
