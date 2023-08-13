@@ -8,13 +8,16 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * this class used to create first relationship
+ * now not use class !*/
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
 @Table(schema = "item")
 public class ItemCopy {
+
     @Id
     @Column(name = "code",length = 30)
     String itemCode;

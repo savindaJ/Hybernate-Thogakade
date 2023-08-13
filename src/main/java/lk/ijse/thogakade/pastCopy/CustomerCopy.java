@@ -8,6 +8,9 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * this class used to create first relationship
+ * now not use class !*/
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
