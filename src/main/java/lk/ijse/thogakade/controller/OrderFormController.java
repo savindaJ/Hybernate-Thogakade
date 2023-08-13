@@ -10,10 +10,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -27,12 +25,14 @@ import lk.ijse.thogakade.dao.custom.CustomerDAO;
 import lk.ijse.thogakade.dto.CustomerDTO;
 import lk.ijse.thogakade.dto.ItemDTO;
 import lk.ijse.thogakade.dto.OrderDTO;
+import lk.ijse.thogakade.dto.tm.CartTM;
 import lk.ijse.thogakade.entity.Customer;
 
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 public class OrderFormController {
 
@@ -51,16 +51,28 @@ public class OrderFormController {
     public TableColumn colDescription;
     public TableColumn colUnitPrice;
     public TableColumn colQty;
-    public TableColumn colTotal;
+    public TableColumn <?,?>colTotal;
     public TableColumn colAction;
     public Label lblNetTotal;
+
+    private ObservableList<CartTM> obList = FXCollections.observableArrayList();
 
     OrderBO orderBO = BoFactory.getInstance().getBo(BoFactory.BOTypes.ORDER);
     @FXML
     void initialize(){
+        setCellValueFactory();
         setCustomerID();
         lblOrderDate.setText(String.valueOf(LocalDate.now()));
         setItemIds();
+    }
+
+    void setCellValueFactory() {
+        colItemCode.setCellValueFactory(new PropertyValueFactory<>("code"));
+        colDescription.setCellValueFactory(new PropertyValueFactory<>("description"));
+        colQty.setCellValueFactory(new PropertyValueFactory<>("qty"));
+        colUnitPrice.setCellValueFactory(new PropertyValueFactory<>("unitPrice"));
+        colTotal.setCellValueFactory(new PropertyValueFactory<>("total"));
+        colAction.setCellValueFactory(new PropertyValueFactory<>("btn"));
     }
 
     private void setItemIds() {
@@ -96,6 +108,69 @@ public class OrderFormController {
     }
 
     public void btnAddToCartOnAction(ActionEvent actionEvent) {
+        String code = cmbItemCode.getValue();
+        String description = lblDescription.getText();
+        int qty = Integer.parseInt(txtQty.getText());
+        double unitPrice = Double.parseDouble(lblUnitPrice.getText());
+        double total = qty * unitPrice;
+
+        Button btn = new Button("Remove");
+        setRemoveBtnOnAction(btn); /* set action to the btnRemove */
+
+        if (!obList.isEmpty()) {
+            for (int i = 0; i < tblOrderCart.getItems().size(); i++) {
+                if (colItemCode.getCellData(i).equals(code)) {
+                    qty += (int) colQty.getCellData(i);
+                    total = qty * unitPrice;
+                    System.out.println(total);
+                    obList.get(i).setQty(qty);
+                    obList.get(i).setTotal(total);
+
+                    tblOrderCart.refresh();
+//                    calculateNetTotal();
+                    return;
+                }
+            }
+        }
+
+        CartTM tm = new CartTM(code, description, qty, unitPrice, total, btn);
+
+        obList.add(tm);
+        tblOrderCart.setItems(obList);
+
+        calculateNetTotal();
+
+        txtQty.setText("");
+    }
+
+    private void calculateNetTotal() {
+        System.out.println(tblOrderCart.getItems().size());
+        double netTotal = 0.0;
+        for (int i = 0; i < tblOrderCart.getItems().size(); i++) {
+            double total = (double) colTotal.getCellData(i);
+            netTotal += total;
+        }
+        lblNetTotal.setText(String.valueOf(netTotal));
+    }
+
+    private void setRemoveBtnOnAction(Button btn) {
+        btn.setOnAction((e) -> {
+            ButtonType yes = new ButtonType("Yes", ButtonBar.ButtonData.OK_DONE);
+            ButtonType no = new ButtonType("No", ButtonBar.ButtonData.CANCEL_CLOSE);
+
+            Optional<ButtonType> result = new Alert(Alert.AlertType.INFORMATION, "Are you sure to remove?", yes, no).showAndWait();
+
+            if (result.orElse(no) == yes) {
+
+                int index = tblOrderCart.getSelectionModel().getSelectedIndex();
+                System.out.println(index);
+                obList.remove(index);
+
+                tblOrderCart.refresh();
+                calculateNetTotal();
+            }
+
+        });
     }
 
     public void btnPlaceOrderOnAction(ActionEvent actionEvent) {
