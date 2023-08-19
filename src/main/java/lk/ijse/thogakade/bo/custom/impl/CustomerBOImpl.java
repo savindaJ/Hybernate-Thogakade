@@ -10,7 +10,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CustomerBOImpl implements CustomerBo {
-    CustomerDAO customerDAO = DAOFactory.getInstance().getDAO(DAOFactory.DAOTypes.CUSTOMERDAO);
+
+    private final CustomerDAO customerDAO;
+
+    {
+        customerDAO = DAOFactory.getInstance().getDAO(DAOFactory.DAOTypes.CUSTOMERDAO);
+    }
 
     @Override
     public boolean save(CustomerDTO dto) {

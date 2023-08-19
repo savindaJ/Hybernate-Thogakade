@@ -17,10 +17,16 @@ import java.util.List;
 
 public class OrderBOImpl implements OrderBO {
 
-    ItemDAO itemDAO = DAOFactory.getInstance().getDAO(DAOFactory.DAOTypes.ITEMDAO);
-    OrderDAO orderDAO = DAOFactory.getInstance().getDAO(DAOFactory.DAOTypes.ORDERDAO);
+    {
+        itemDAO = DAOFactory.getInstance().getDAO(DAOFactory.DAOTypes.ITEMDAO);
+        orderDAO = DAOFactory.getInstance().getDAO(DAOFactory.DAOTypes.ORDERDAO);
+        customerDAO =DAOFactory.getInstance().getDAO(DAOFactory.DAOTypes.CUSTOMERDAO);
+    }
 
-    CustomerDAO customerDAO = DAOFactory.getInstance().getDAO(DAOFactory.DAOTypes.CUSTOMERDAO);
+    private final ItemDAO itemDAO;
+    private final OrderDAO orderDAO;
+    private final CustomerDAO customerDAO;
+
     @Override
     public boolean save(OrderDTO dto) {
         return false;

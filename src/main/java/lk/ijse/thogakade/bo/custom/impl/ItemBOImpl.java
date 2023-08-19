@@ -11,7 +11,11 @@ import java.util.List;
 
 public class ItemBOImpl implements ItemBO {
 
-    ItemDAO itemDAO = DAOFactory.getInstance().getDAO(DAOFactory.DAOTypes.ITEMDAO);
+    private final ItemDAO itemDAO;
+
+    {
+        itemDAO = DAOFactory.getInstance().getDAO(DAOFactory.DAOTypes.ITEMDAO);
+    }
 
     @Override
     public boolean save(ItemDTO dto) {
