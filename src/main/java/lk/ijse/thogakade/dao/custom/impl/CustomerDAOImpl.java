@@ -77,4 +77,15 @@ public class CustomerDAOImpl implements CustomerDAO {
         session.close();
         return list;
     }
+
+    @Override
+    public Customer getObjectInWhere(String id) {
+        String sql = "SELECT C FROM Customer AS C WHERE C.id =: customerID";
+        try (Session session = StandardConfig.getInstance().getSession()) {
+            Query query = session.createQuery(sql);
+            query.setParameter("customerID",id);
+            Customer singleResult = (Customer) query.getSingleResult();
+            return singleResult;
+        }
+    }
 }
