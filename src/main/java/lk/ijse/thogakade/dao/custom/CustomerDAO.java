@@ -6,8 +6,6 @@ import lk.ijse.thogakade.entity.Customer;
 import java.util.List;
 
 public interface CustomerDAO extends CrudDAO<Customer,String> {
-
     List<Customer> getAllJPQL();
-
-    Customer getObjectInWhere(String id);
+    Customer getObjectInJPQL(String id);
 }
