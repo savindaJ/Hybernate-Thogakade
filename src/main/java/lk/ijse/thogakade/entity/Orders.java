@@ -1,5 +1,6 @@
 package lk.ijse.thogakade.entity;
 
+import lk.ijse.thogakade.util.SavindaJ;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
@@ -9,9 +10,10 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
+
 @Data
 @AllArgsConstructor
-
+@SavindaJ(name = "savinda jayasekara" )
 @Entity
 @Table(schema = "orders")
 public class Orders {

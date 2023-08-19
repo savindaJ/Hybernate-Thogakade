@@ -18,12 +18,14 @@ public class OrderDetail {
     private int qty;
     @Column(name = "order_price")
     private double price;
+
     @ManyToOne
     @JoinColumn(name = "order_id",
                 referencedColumnName = "order_id",
                 insertable = false,
                 updatable = false)
     private Orders order;
+
     @ManyToOne
     @JoinColumn(name = "item_id",
                 referencedColumnName = "item_id",

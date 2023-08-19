@@ -113,7 +113,7 @@ public class CustomerController {
         setDetail();
         boolean update = customerBo.update(new CustomerDTO(name, address, salary, Integer.parseInt(id)));
         if (update){
-            new CustomAlert(Alert.AlertType.CONFIRMATION,"Update ","Updated !","Update successful !").show();
+            new CustomAlert(Alert.AlertType.INFORMATION,"Update ","Updated !","Update successful !").show();
         }else {
             new CustomAlert(Alert.AlertType.ERROR,"Update ","Not Update !","Update not successful !").show();
         }

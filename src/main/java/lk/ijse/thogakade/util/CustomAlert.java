@@ -17,7 +17,7 @@ public class CustomAlert extends Alert {
                 image = "/assets/icons8-error (1).gif";
                 break;
             case INFORMATION:
-                image = "/assets/admin.png";
+                image = "/assets/icons8-confirmed-user-270.png";
                 break;
             case WARNING:
                 image = "/assets/icons8-error.gif";
